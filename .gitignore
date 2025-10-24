@@ -1,5 +1,10 @@
-nano .gitignore # (Create/edit the file as instructed before)
-git init
-git add .
-git commit -m "Initial project setup"
-# Add remote and push to GitHub as instructed before
+# Ignore Terraform executable
+terraform/terraform.exe
+terraform.exe
+
+# Ignore Terraform provider plugins downloaded by init
+terraform/.terraform/
+.terraform/
+
+# Ignore specific large files just in case
+*.exe
