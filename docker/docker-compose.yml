@@ -1,0 +1,53 @@
+# docker/docker-compose.yml
+version: '3.8'
+services:
+  web:
+    image: django-app:latest # Name the image we build
+    build:
+      context: .. # Build context is the parent directory (devops-project)
+      dockerfile: docker/Dockerfile # Point to the Dockerfile we just created
+    ports:
+      - "80:8000" # Map host port 80 to container port 8000
+    environment:
+      # These need to match the 'db' service environment variables
+      - DB_NAME=postgres
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
+      - DB_HOST=db # Service name of the database container
+      - DB_PORT=5432
+      # Add Django specific env vars if needed, e.g., SECRET_KEY, DEBUG=False
+      - DJANGO_SETTINGS_MODULE=main_project.settings
+    depends_on:
+      - db # Wait for the db service to be healthy (basic check)
+    networks:
+      - app-network
+    deploy:
+      replicas: 1 # Changed to 1 since we only have one node
+      placement:
+        constraints:
+          - node.role == manager
+
+  db:
+    image: postgres:16 # Use PostgreSQL version 16
+    volumes:
+      - db_data:/var/lib/postgresql/data # Persist database data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    networks:
+      - app-network
+    # Optional: Add healthcheck for depends_on
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U myuser -d postgres"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+
+volumes:
+  db_data: # Define the named volume for persistence
+
+networks:
+  app-network: # Define the overlay network for swarm services
+    driver: overlay
+    attachable: true # Allows standalone containers to attach (useful for debugging)

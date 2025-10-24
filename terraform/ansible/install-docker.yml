@@ -1,0 +1,32 @@
+---
+- name: Install Docker on Amazon Linux 2
+  hosts: manager # Only target the single manager node
+  become: yes # Run commands as root (sudo)
+  tasks:
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+        update_cache: yes
+
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes # Ensure Docker starts on boot
+
+    - name: Add ec2-user to docker group
+      user:
+        name: ec2-user # Correct user for Amazon Linux 2
+        groups: docker
+        append: yes # Add to existing groups
+
+    - name: Restart Docker to apply group changes (optional but safe)
+      service:
+        name: docker
+        state: restarted

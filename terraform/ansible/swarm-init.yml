@@ -1,0 +1,21 @@
+---
+- name: Initialize the Swarm Manager
+  hosts: manager
+  become: yes
+  tasks:
+    - name: Initialize Docker Swarm if not already initialized
+      command: docker swarm init --advertise-addr {{ ansible_host }}
+      register: swarm_init_result
+      ignore_errors: yes # Ignore error if swarm is already initialized
+
+    - name: Display Swarm init result (debug)
+      debug:
+        var: swarm_init_result
+        verbosity: 1 # Show only if running with -v
+
+    - name: Fail if swarm init failed for unexpected reason
+      fail:
+        msg: "Failed to initialize Docker Swarm: {{ swarm_init_result.stderr }}"
+      when:
+        - swarm_init_result.rc != 0
+        - "'This node is already part of a swarm' not in swarm_init_result.stderr"
