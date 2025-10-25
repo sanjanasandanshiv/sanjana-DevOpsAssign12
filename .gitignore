@@ -8,3 +8,5 @@ terraform/.terraform/
 
 # Ignore specific large files just in case
 *.exe
+
+**/staticfiles_collected/
