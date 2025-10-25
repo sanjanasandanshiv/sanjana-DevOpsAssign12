@@ -1,0 +1,122 @@
+/* user_auth/static/user_auth/style.css */
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Example gradient */
+}
+
+.login-container {
+    width: 360px; /* Adjust width as needed */
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    backdrop-filter: blur(5px); /* Optional: blur background behind container */
+}
+
+.avatar {
+    width: 80px; /* Container for the icon */
+    height: 80px;
+    background-color: #555; /* Dark background for icon */
+    border-radius: 50%; /* Make it circular */
+    margin: 0 auto 30px auto; /* Center and add space below */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* If using an image */
+}
+
+.avatar img {
+  width: 100%; /* Make image fill the circle */
+  height: auto;
+}
+/* If using an icon font instead of an image: */
+/* .avatar i {
+    font-size: 40px;
+    color: white;
+} */
+
+
+.input-group {
+    position: relative; /* Needed for positioning icons */
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: none; /* Hiding labels, using placeholders */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 40px; /* Add padding for icon */
+    border: 1px solid #ddd;
+    background-color: #eee; /* Light grey background for inputs */
+    border-radius: 8px;
+    box-sizing: border-box; /* Include padding in width */
+    font-size: 1em;
+}
+/* Add icons using pseudo-elements (requires font-awesome or similar) or background images */
+/* Example using background images (needs actual icon files): */
+.input-group input[type="email"] {
+     /* background: #eee url('email_icon.png') no-repeat 10px center;
+     background-size: 16px 16px; */
+}
+ .input-group input[type="password"] {
+     /* background: #eee url('lock_icon.png') no-repeat 10px center;
+     background-size: 16px 16px; */
+}
+
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85em;
+    color: #555;
+}
+ .options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.options input[type="checkbox"] {
+    margin-right: 5px;
+}
+.options a {
+    color: #555;
+    text-decoration: none;
+}
+.options a:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #7f9cfd, #b88cf2); /* Button gradient */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    margin-top: 10px; /* Space above button */
+}
+
+.login-button:hover {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+}
+
+.error-message {
+    color: #d9534f; /* Reddish color for errors */
+    font-size: 0.9em;
+    margin-top: 15px;
+}

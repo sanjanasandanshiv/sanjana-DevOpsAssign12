@@ -1,0 +1,24 @@
+---
+- name: Initialize the Swarm Manager
+  hosts: manager
+  become: yes # Run commands with sudo
+  tasks:
+    - name: Initialize Docker Swarm if not already initialized
+      # Runs 'docker swarm init' using the node's IP address
+      command: docker swarm init --advertise-addr {{ ansible_host }}
+      register: swarm_init_result # Save the command's output
+      ignore_errors: yes # Don't fail if swarm is already initialized
+
+    - name: Display Swarm init result (for debugging)
+      # Shows the output, useful if running ansible-playbook with -v
+      debug:
+        var: swarm_init_result
+        verbosity: 1
+
+    - name: Fail if swarm init failed for unexpected reason
+      # Check if the command failed (rc != 0) AND the error message wasn't the expected "already part of a swarm" message
+      fail:
+        msg: "Failed to initialize Docker Swarm: {{ swarm_init_result.stderr }}"
+      when:
+        - swarm_init_result.rc != 0
+        - "'This node is already part of a swarm' not in swarm_init_result.stderr"

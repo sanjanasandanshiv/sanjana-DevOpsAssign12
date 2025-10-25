@@ -123,13 +123,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_URL = 'static/'
+
+# Tells Django where *your* static files are (in addition to app static dirs)
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Add this line: Tells collectstatic WHERE TO COPY files TO
+STATIC_ROOT = BASE_DIR / "staticfiles_collected"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 
 

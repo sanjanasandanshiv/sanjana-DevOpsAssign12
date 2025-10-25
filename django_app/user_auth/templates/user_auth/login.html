@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_auth/style.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <div class="avatar">
+                <img src="{% static 'user_auth/avatar_icon.png' %}" alt="User Avatar">
+            </div>
+            <form method="post">
+                {% csrf_token %} <div class="input-group">
+                    <label for="id_username">Email ID</label>
+                    <input type="email" name="username" id="id_username" placeholder="Email ID" required>
+                     </div>
+
+                <div class="input-group">
+                    <label for="id_password">Password</label>
+                    <input type="password" name="password" id="id_password" placeholder="Password" required>
+                </div>
+
+                <div class="options">
+                    <label>
+                        <input type="checkbox" name="remember_me"> Remember me
+                    </label>
+                    <a href="#">Forgot Password?</a> </div>
+
+                {% if form.errors %}
+                    <p class="error-message">Your email ID or password didn't match. Please try again.</p>
+                {% endif %}
+
+                <button type="submit" class="login-button">LOGIN</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
