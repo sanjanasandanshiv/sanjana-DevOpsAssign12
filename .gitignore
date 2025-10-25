@@ -1,12 +1,17 @@
-# Ignore Terraform executable
-terraform/terraform.exe
-terraform.exe
+# Virtual Environment
+venv/
+django_app/venv/
 
-# Ignore Terraform provider plugins downloaded by init
-terraform/.terraform/
+# macOS files
+.DS_Store
+
+# Python/Django specific
+__pycache__/
+*.pyc
+db.sqlite3
+*.log
 .terraform/
+*.tfstate*
 
-# Ignore specific large files just in case
-*.exe
-
+# Large local folders
 **/staticfiles_collected/
