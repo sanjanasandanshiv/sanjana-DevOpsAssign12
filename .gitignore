@@ -2,16 +2,17 @@
 venv/
 django_app/venv/
 
-# macOS files
+# Local Files / Logs
 .DS_Store
-
-# Python/Django specific
 __pycache__/
 *.pyc
-db.sqlite3
 *.log
+db.sqlite3
+
+# Terraform & Infrastructure
 .terraform/
-*.tfstate*
+*.tfstate
+*.tfstate.backup
 
 # Large local folders
 **/staticfiles_collected/
