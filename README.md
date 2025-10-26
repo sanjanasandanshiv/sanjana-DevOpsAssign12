@@ -8,31 +8,33 @@ This repository is a complete submission for the assignment:
 
 [cite_start]This package contains the infrastructure-as-code (Terraform), configuration management (Ansible), container definitions (Docker), and a full functional Django app (login/register/home/logout) wired to a login table in PostgreSQL [cite: 13, 16-25, 30].
 
+## Layout 
+```bash
 sanjana-DevOpsAssign12/
-├── .gitignore               # Excludes venv/, staticfiles_collected/, .terraform/
-├── README.md                # Submission overview and instructions
-├── ansible/
-│   ├── install-docker.yml   # Installs Docker/Docker Compose prerequisites
-│   ├── swarm-init.yml       # Initializes Swarm Manager and joins Worker(s)
-│   └── inventory.ini        # References EIPs of Manager/Worker nodes
+├── .gitignore                 # Excludes venv/, staticfiles_collected/, .terraform/
+├── README.md                  # Submission overview and instructions
+├── ansible/                   # Configuration management scripts
+│   ├── install-docker.yml     # Installs Docker/Docker Compose prerequisites
+│   ├── swarm-init.yml         # Initializes Swarm Manager and joins Worker(s)
+│   └── inventory.ini          # References EIPs of Manager/Worker nodes
 ├── ci/
-│   └── deploy.yml           # GitHub Actions YAML file for CI/CD pipeline
+│   └── deploy.yml             # GitHub Actions YAML file for CI/CD pipeline
 ├── docker/
-│   ├── Dockerfile           # Builds the Django Web application image
-│   └── docker-compose.yml   # Defines web (2 replicas) and db (PostgreSQL) services for Swarm
+│   ├── Dockerfile             # Builds the Django Web application image
+│   └── docker-compose.yml     # Defines web (2 replicas) and db (PostgreSQL) services for Swarm
 ├── django_app/
-│   ├── manage.py
-│   ├── requirements.txt
-│   ├── main_project/        # Django project settings
-│   └── user_auth/           # Django app: login, register, home, logout logic
+│   ├── manage.py              # Django management script
+│   ├── requirements.txt       # Python dependencies
+│   ├── main_project/          # Django project settings
+│   └── user_auth/             # Django app: login, register, home, logout logic
 ├── scripts/
-│   └── bootstrap.sh         # Single script to run Terraform and Ansible
-├── selenium/                # Placeholder for Selenium test scripts
+│   ├── bootstrap.sh           # Single script to run Terraform and Ansible
+│   └── selenium/              # Placeholder for Selenium test scripts
 └── terraform/
-    ├── main.tf              # Defines EC2 instances (t2.micro), Security Group, and EIPs
-    ├── provider.tf          # AWS provider configuration
-    └── outputs.tf           # Outputs the public IP addresses
-
+    ├── main.tf                # Defines EC2 instances (t2.micro), Security Group, and EIPs
+    ├── provider.tf            # AWS provider configuration
+    └── outputs.tf             # Outputs the public IP addresses
+```
 ## Notes
 
 * The Django app is functional and can be tested.
